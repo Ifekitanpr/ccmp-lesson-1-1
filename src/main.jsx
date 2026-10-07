@@ -98,9 +98,11 @@ function PromiseScreen({ complete, onComplete }) {
   };
 
   return (
-    <div className="split-screen promise-screen">
-      <div className="screen-copy">
-        <h1>{lesson.background.heading}</h1>
+    <div className="opening-screen">
+      <div className="case-study-title"><BookOpen /><h1>{lesson.fullTitle}</h1></div>
+      <div className="split-screen promise-screen">
+        <div className="screen-copy">
+        <h2>{lesson.background.heading}</h2>
         {lesson.background.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         <p className="source-lead">The promise was clear:</p>
         <div className="promise-list">
@@ -114,8 +116,9 @@ function PromiseScreen({ complete, onComplete }) {
             <strong>{lesson.background.close}</strong>
           </motion.div>
         )}
+        </div>
+        <motion.img className="screen-art" src={hrisLaunch} alt="Daniella presents the new HR information system to her team" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={transition} />
       </div>
-      <motion.img className="screen-art" src={hrisLaunch} alt="Daniella presents the new HR information system to her team" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={transition} />
     </div>
   );
 }
@@ -265,8 +268,16 @@ function OutcomeScreen({ complete, onComplete }) {
   );
 }
 
-function InsightScreen({ visited, onVisit }) {
+function InsightScreen({ visited, onVisit, responses, onResponse }) {
   const [active, setActive] = useState(0);
+  const response = responses[active];
+  const saved = visited.has(active);
+  const saveAndContinue = () => {
+    if (!response.trim()) return;
+    onVisit(active);
+    if (active < lesson.insight.questions.length - 1) setActive((index) => index + 1);
+  };
+
   return (
     <div className="insight-screen">
       <div className="insight-statement">
@@ -277,22 +288,34 @@ function InsightScreen({ visited, onVisit }) {
         </div>
         <img src={turningPoint} alt="Daniella connects system delivery with people moving forward" />
       </div>
-      <div className="discussion-layout">
-        <div>
-          <h2>{lesson.insight.discussionHeading}</h2>
-          <div className="discussion-list">
-            {lesson.insight.questions.map((question, index) => (
-              <button type="button" key={question} className={`${active === index ? "active" : ""} ${visited.has(index) ? "read" : ""}`} onClick={() => { setActive(index); onVisit(index); }}>
-                <span>{index + 1}</span><strong>{question}</strong>{visited.has(index) ? <Check /> : <ChevronRight />}
-              </button>
-            ))}
+      <div className="discussion-journal">
+        <div className="journal-head">
+          <div><h2>{lesson.insight.discussionHeading}</h2><span>Question {active + 1} of {lesson.insight.questions.length}</span></div>
+          <div className="question-progress" aria-label={`${visited.size} of ${lesson.insight.questions.length} responses saved`}>
+            {lesson.insight.questions.map((_, index) => <span key={index} className={`${index === active ? "active" : ""} ${visited.has(index) ? "saved" : ""}`} />)}
           </div>
         </div>
-        <motion.div className="discussion-focus" key={active} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={transition}>
-          <MessageCircle />
-          <p>{lesson.insight.questions[active]}</p>
-          <span>{lesson.insight.close}</span>
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div className="journal-question" key={active} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={transition}>
+            <div className="question-copy"><MessageCircle /><p>{lesson.insight.questions[active]}</p></div>
+            <label htmlFor="discussion-response">Your response</label>
+            <textarea
+              id="discussion-response"
+              value={response}
+              onChange={(event) => onResponse(active, event.target.value)}
+              placeholder="Write your response here…"
+              rows="5"
+            />
+            <div className="journal-actions">
+              <button className="secondary-button" type="button" disabled={active === 0} onClick={() => setActive((index) => index - 1)}><ArrowLeft /> Previous question</button>
+              <button className="primary-cta" type="button" disabled={!response.trim()} onClick={saveAndContinue}>
+                {active === lesson.insight.questions.length - 1 ? (saved ? "Response saved" : "Save response") : "Save & continue"}
+                {active === lesson.insight.questions.length - 1 ? <Check /> : <ArrowRight />}
+              </button>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+        <p className="discussion-close">{lesson.insight.close}</p>
       </div>
     </div>
   );
@@ -319,6 +342,7 @@ function App() {
   const [soundOn, setSoundOn] = useState(true);
   const [principlesVisited, setPrinciplesVisited] = useState([]);
   const [questionsVisited, setQuestionsVisited] = useState([]);
+  const [discussionResponses, setDiscussionResponses] = useState(() => lesson.insight.questions.map(() => ""));
   const [lessonComplete, setLessonComplete] = useState(false);
   useLessonAudio(soundOn);
 
@@ -335,6 +359,7 @@ function App() {
     if (next.length === lesson.insight.questions.length) markComplete(4);
     return next;
   });
+  const updateDiscussionResponse = (index, value) => setDiscussionResponses((items) => items.map((item, itemIndex) => itemIndex === index ? value : item));
   const goTo = (index) => {
     if (index < 0 || index >= lesson.tabs.length) return;
     if (index > 0 && !completed[index - 1]) return;
@@ -368,7 +393,7 @@ function App() {
               {current === 1 && <RealityScreen complete={completed[1]} onComplete={() => markComplete(1)} />}
               {current === 2 && <ResponseScreen visited={principleSet} onVisit={visitPrinciple} />}
               {current === 3 && <OutcomeScreen complete={completed[3]} onComplete={() => markComplete(3)} />}
-              {current === 4 && <InsightScreen visited={questionSet} onVisit={visitQuestion} />}
+              {current === 4 && <InsightScreen visited={questionSet} onVisit={visitQuestion} responses={discussionResponses} onResponse={updateDiscussionResponse} />}
             </section>
             <footer className="lesson-footer">
               <button className="secondary-button" type="button" disabled={current === 0} onClick={() => goTo(current - 1)}><ArrowLeft /> Previous</button>

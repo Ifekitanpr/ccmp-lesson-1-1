@@ -1,6 +1,7 @@
 export const lesson = {
   number: "1.1",
   title: "Case Study: Implementing a New HR Information System",
+  fullTitle: "LESSON 1.1: Case Study: Implementing a New HR Information System.",
   tabs: ["The promise", "Reality hits", "The response", "Three months later", "The insight"],
   background: {
     heading: "Daniella and the HRIS Transformation",

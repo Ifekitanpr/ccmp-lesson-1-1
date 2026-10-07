@@ -174,6 +174,7 @@ button:focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
 }
 .screen-copy { min-width: 0; }
 .screen-copy h1,
+.screen-copy h2,
 .outcome-copy h1,
 .response-intro h1,
 .insight-statement h1 {
@@ -183,6 +184,10 @@ button:focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
   line-height: 1.06;
   letter-spacing: -.04em;
 }
+.opening-screen { max-width: 1180px; margin: 0 auto; }
+.case-study-title { display: flex; align-items: center; gap: 10px; margin: -4px 0 28px; border-bottom: 1px solid var(--line); padding: 0 0 16px; }
+.case-study-title svg { width: 19px; flex: none; color: var(--orange); }
+.case-study-title h1 { margin: 0; color: #334155; font-size: 14px; font-weight: 800; line-height: 1.4; letter-spacing: .01em; }
 .screen-copy p,
 .outcome-copy p,
 .response-intro p,
@@ -335,19 +340,27 @@ button:focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
 .insight-statement { display: grid; grid-template-columns: minmax(0, 1fr) 340px; align-items: center; gap: 36px; }
 .insight-statement img { display: block; width: 100%; height: 240px; object-fit: contain; }
 .insight-statement > div > strong { display: block; max-width: 760px; color: var(--navy); font-size: clamp(22px, 2.3vw, 32px); line-height: 1.28; letter-spacing: -.025em; }
-.discussion-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(310px, .75fr); gap: 26px; margin-top: 30px; border-top: 1px solid var(--line); padding-top: 26px; }
-.discussion-layout h2 { margin: 0 0 13px; font-size: 22px; }
-.discussion-list { display: grid; gap: 8px; }
-.discussion-list button { display: grid; grid-template-columns: 30px 1fr 20px; align-items: center; gap: 11px; border: 1px solid var(--line); border-radius: 9px; background: #fff; padding: 12px 14px; color: var(--navy); text-align: left; cursor: pointer; }
-.discussion-list button.active { border-color: var(--blue); background: #f6faff; }
-.discussion-list button.read > svg { color: var(--blue); }
-.discussion-list button > span { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 7px; background: #edf5ff; color: var(--blue); font-size: 11px; font-weight: 800; }
-.discussion-list strong { font-size: 13px; line-height: 1.42; }
-.discussion-list svg { width: 16px; color: #94a3b8; }
-.discussion-focus { display: flex; min-height: 210px; flex-direction: column; justify-content: center; border-radius: 14px; background: var(--navy); padding: 26px; color: #fff; }
-.discussion-focus > svg { width: 24px; color: var(--orange); }
-.discussion-focus p { margin: 18px 0; color: #fff; font-size: 18px; font-weight: 700; line-height: 1.48; }
-.discussion-focus span { color: #b8c5d6; font-size: 13px; line-height: 1.52; }
+.discussion-journal { max-width: 920px; margin: 30px auto 0; border-top: 1px solid var(--line); padding-top: 26px; }
+.journal-head { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 14px; }
+.journal-head h2 { margin: 0 0 4px; font-size: 22px; }
+.journal-head > div > span { color: var(--muted); font-size: 12px; font-weight: 700; }
+.question-progress { display: flex; gap: 7px; }
+.question-progress span { width: 34px; height: 4px; border-radius: 3px; background: #dbe4ee; }
+.question-progress span.active { background: #8abfff; }
+.question-progress span.saved { background: var(--blue); }
+.journal-question { border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 24px; box-shadow: 0 12px 30px #0f172a0b; }
+.question-copy { display: grid; grid-template-columns: 32px 1fr; align-items: start; gap: 12px; margin-bottom: 22px; }
+.question-copy svg { width: 23px; color: var(--orange); }
+.question-copy p { margin: 0; color: var(--navy); font-size: 20px; font-weight: 700; line-height: 1.48; }
+.journal-question label { display: block; margin-bottom: 8px; color: #334155; font-size: 13px; font-weight: 800; }
+.journal-question textarea { width: 100%; min-height: 132px; resize: vertical; border: 1px solid #cbd5e1; border-radius: 9px; background: #fbfdff; padding: 14px 15px; color: var(--navy); font: inherit; font-size: 15px; line-height: 1.55; caret-color: var(--blue); }
+.journal-question textarea::placeholder { color: #738196; }
+.journal-question textarea:focus { outline: 3px solid #bfdbfe; border-color: var(--blue); }
+.journal-actions { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 16px; }
+.journal-actions .secondary-button { min-height: 46px; }
+.journal-actions .primary-cta { min-height: 46px; margin-top: 0; }
+.journal-actions .primary-cta:disabled { border-color: #dbe4ee; background: #e8eef5; color: #93a0b2; cursor: not-allowed; }
+.discussion-close { margin: 14px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; text-align: center; }
 
 .lesson-footer { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 18px; border-top: 1px solid var(--line); padding: 18px 30px; }
 .secondary-button { justify-self: start; border: 1px solid var(--line); background: #fff; color: #334155; }
@@ -376,7 +389,6 @@ button:focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
   .outcome-screen > img { grid-row: 1; max-height: 330px; }
   .response-intro,
   .insight-statement { grid-template-columns: 1fr 300px; }
-  .discussion-layout { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 720px) {
@@ -398,6 +410,7 @@ button:focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
   .reality-layout,
   .outcome-screen { gap: 24px; min-height: 0; }
   .screen-copy h1,
+  .screen-copy h2,
   .outcome-copy h1,
   .response-intro h1,
   .insight-statement h1 { font-size: 32px; }
@@ -410,7 +423,13 @@ button:focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
   .insight-statement img { grid-row: 1; height: 210px; }
   .principle-grid { grid-template-columns: 1fr; }
   .principle-heading { align-items: start; flex-direction: column; }
-  .discussion-layout { margin-top: 24px; }
+  .case-study-title { align-items: flex-start; margin-bottom: 22px; }
+  .case-study-title h1 { font-size: 12px; }
+  .discussion-journal { margin-top: 24px; }
+  .journal-head { align-items: flex-start; flex-direction: column; }
+  .journal-actions { align-items: stretch; flex-direction: column-reverse; }
+  .journal-actions .secondary-button,
+  .journal-actions .primary-cta { width: 100%; }
   .lesson-footer { grid-template-columns: 1fr 1fr; padding: 16px 18px; }
   .footer-status { grid-column: 1 / -1; grid-row: 1; justify-content: center; }
   .secondary-button { grid-column: 1; grid-row: 2; }
