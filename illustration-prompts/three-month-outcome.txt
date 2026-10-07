@@ -1,0 +1,7 @@
+Use case: scientific-educational
+Asset type: CertSprints click-through lesson illustration, landscape 3:2 on a clean white background
+Style reference: Match the exact established illustration language in the three reference images: simplified flat vector characters and objects, crisp geometric silhouettes, minimal facial details, solid CertSprints blue/navy/orange fills, restrained pale-blue shadows, almost no texture, no glossy rendering, no painterly detail, no photorealistic anatomy. Preserve the generous white negative space and clean educational-diagram composition. Do not copy the reference compositions.
+Recurring character: Daniella is a Black woman in her early 30s with warm brown skin, shoulder-length simple dark twists, burnt-orange blouse, navy trousers, and small gold hoop earrings. Keep her simplified and consistent with the reference character style.
+Palette: #087BFF blue, #FF6B35 orange, #0F172A navy, cool gray-blue, white.
+Constraints: no text, no logos, no watermark, no green, no detailed background, no realism, no 3D, no glossy or cinematic lighting.
+Scene: Three months later, Daniella and the team use the HR system comfortably. Show fewer support-ticket icons, smoother performance-review flow, visible feedback-loop arrows, and relaxed employees. Steady adoption and trust, not celebration.
