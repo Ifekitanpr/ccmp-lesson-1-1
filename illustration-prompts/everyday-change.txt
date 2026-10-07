@@ -1,0 +1,7 @@
+Use case: illustration-story
+Asset type: responsive web learning illustration for a CCMP clickthrough lesson
+Primary request: Show one adult learner encountering several ordinary life changes at once: a newly updated mobile app, a changed school portal, a new workplace process, and a new team role. The person pauses and compares the unfamiliar new way with a familiar old way, expressing mild hesitation rather than distress.
+Style/medium: polished flat 2D editorial vector-style raster illustration matching CertSprints lesson artwork; crisp rounded geometry, subtle depth, diverse contemporary characters, professional and warm.
+Composition/framing: wide landscape composition, one clear focal person, low object count, generous clean white negative space, fully visible figures and devices.
+Color palette: vivid CertSprints blue, deep navy, warm orange accents, pale cool blue neutrals, white background.
+Constraints: no text, no labels, no logos, no watermark, no decorative confetti, no gradients, no photorealism.

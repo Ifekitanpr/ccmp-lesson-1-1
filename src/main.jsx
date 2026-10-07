@@ -9,29 +9,19 @@ import {
   Check,
   ChevronRight,
   Menu,
-  MessageCircle,
-  Quote,
   Volume2,
   VolumeX,
   X,
 } from "lucide-react";
 import { useLessonAudio } from "../../shared/useLessonAudio";
 import { lesson } from "./lesson-data";
-import hrisLaunch from "./assets/illustrations/hris-launch.webp";
-import realityHits from "./assets/illustrations/reality-hits.webp";
-import turningPoint from "./assets/illustrations/turning-point.webp";
-import listeningSession from "./assets/illustrations/listening-session.webp";
-import targetedEnablement from "./assets/illustrations/targeted-enablement.webp";
-import threeMonthOutcome from "./assets/illustrations/three-month-outcome.webp";
+import everydayChange from "./assets/illustrations/everyday-change.webp";
+import humanTransition from "./assets/illustrations/human-transition.webp";
+import supportingChange from "./assets/illustrations/supporting-change.webp";
+import leadingChange from "./assets/illustrations/leading-change.webp";
 import "./styles.css";
 
-const images = {
-  "listening-session": listeningSession,
-  "targeted-enablement": targetedEnablement,
-  "three-month-outcome": threeMonthOutcome,
-};
-
-const transition = { duration: 0.38, ease: [0.22, 1, 0.36, 1] };
+const transition = { duration: 0.34, ease: [0.22, 1, 0.36, 1] };
 
 function Header({ current, completed, soundOn, onSound, onOutline }) {
   return (
@@ -42,10 +32,7 @@ function Header({ current, completed, soundOn, onSound, onOutline }) {
       </button>
       <div className="progress-dots" aria-label={`Section ${current + 1} of ${lesson.tabs.length}`}>
         {lesson.tabs.map((tab, index) => (
-          <span
-            key={tab}
-            className={`progress-dot ${index === current ? "active" : ""} ${completed[index] ? "done" : ""}`}
-          >
+          <span key={tab} className={`progress-dot ${index === current ? "active" : ""} ${completed[index] ? "done" : ""}`}>
             {completed[index] ? <Check /> : null}
           </span>
         ))}
@@ -90,80 +77,97 @@ function Outline({ open, current, completed, onToggle, onSelect }) {
   );
 }
 
-function PromiseScreen({ complete, onComplete }) {
+function OpeningScreen({ complete, onComplete }) {
+  const [example, setExample] = useState(0);
   const [revealed, setRevealed] = useState(complete);
-  const reveal = () => {
-    setRevealed(true);
-    onComplete();
+  const atLast = example === lesson.opening.examples.length - 1;
+
+  const advance = () => {
+    if (!atLast) setExample((value) => value + 1);
+    else {
+      setRevealed(true);
+      onComplete();
+    }
   };
 
   return (
-    <div className="opening-screen">
-      <div className="case-study-title"><BookOpen /><h1>{lesson.fullTitle}</h1></div>
-      <div className="split-screen promise-screen">
-        <div className="screen-copy">
-        <h2>{lesson.background.heading}</h2>
-        {lesson.background.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-        <p className="source-lead">The promise was clear:</p>
-        <div className="promise-list">
-          {lesson.background.promise.map((item) => <span key={item}><Check />{item}</span>)}
-        </div>
-        {!revealed ? (
-          <button className="primary-cta" type="button" onClick={reveal}>Follow the launch <ArrowRight /></button>
-        ) : (
-          <motion.div className="delivery-reveal" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
-            {lesson.background.delivery.map((line) => <p key={line}>{line}</p>)}
-            <strong>{lesson.background.close}</strong>
-          </motion.div>
-        )}
-        </div>
-        <motion.img className="screen-art" src={hrisLaunch} alt="Daniella presents the new HR information system to her team" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={transition} />
-      </div>
-    </div>
-  );
-}
-
-function RealityScreen({ complete, onComplete }) {
-  const [signal, setSignal] = useState(0);
-  const [revealed, setRevealed] = useState(complete);
-  const atLastSignal = signal === lesson.reality.signals.length - 1;
-  const advance = () => setSignal((value) => Math.min(value + 1, lesson.reality.signals.length - 1));
-  const reveal = () => {
-    setRevealed(true);
-    onComplete();
-  };
-
-  return (
-    <div className="reality-layout">
-      <div className="reality-visual">
-        <img src={realityHits} alt="Daniella notices employees avoiding the HR system and an overwhelmed support team" />
-        <div className="signal-progress" aria-label={`Signal ${signal + 1} of ${lesson.reality.signals.length}`}>
-          {lesson.reality.signals.map((_, index) => <span key={index} className={index <= signal ? "seen" : ""} />)}
-        </div>
-      </div>
-      <div className="screen-copy">
-        <h1>The Reality Hits</h1>
-        <p>{lesson.reality.intro}</p>
+    <div className="opening-layout">
+      <div className="opening-copy">
+        <h1>{lesson.opening.heading}</h1>
+        <p className="lead">{lesson.opening.subheading}</p>
         <AnimatePresence mode="wait">
-          <motion.div className="signal-card" key={signal} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={transition}>
-            <span>{String(signal + 1).padStart(2, "0")}</span>
-            <strong>{lesson.reality.signals[signal]}</strong>
+          <motion.div className="example-focus" key={example} initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} transition={transition}>
+            <span>{example + 1} of {lesson.opening.examples.length}</span>
+            <strong>{lesson.opening.examples[example]}</strong>
           </motion.div>
         </AnimatePresence>
-        {atLastSignal && (
-          <motion.div className="hallway-quotes" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={transition}>
-            {lesson.reality.quotes.map((quote) => <p key={quote}><Quote />{quote}</p>)}
+        {!revealed ? (
+          <button className="primary-cta" type="button" onClick={advance}>
+            {atLast ? "See what happened" : "Another example"}<ArrowRight />
+          </button>
+        ) : (
+          <motion.div className="opening-reveal" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
+            <div className="experience-sequence">
+              {lesson.opening.sequence.map((line) => <p key={line}>{line}</p>)}
+            </div>
+            <div className="opening-conclusion">
+              <p>{lesson.opening.conclusion[0]}</p>
+              <strong>{lesson.opening.conclusion[1]}</strong>
+            </div>
           </motion.div>
         )}
-        {!atLastSignal ? (
-          <button className="primary-cta" type="button" onClick={advance}>Next signal <ArrowRight /></button>
-        ) : !revealed ? (
-          <button className="primary-cta" type="button" onClick={reveal}>What Daniella realized <ArrowRight /></button>
+      </div>
+      <motion.img src={everydayChange} alt="A learner thinking through changes to an app, school system, workplace process, and team role" initial={{ opacity: 0, x: 22 }} animate={{ opacity: 1, x: 0 }} transition={transition} />
+    </div>
+  );
+}
+
+function ExperienceScreen({ complete, onComplete }) {
+  const [active, setActive] = useState(0);
+  const [revealed, setRevealed] = useState(complete);
+  const stage = lesson.experience.stages[active];
+  const atLast = active === lesson.experience.stages.length - 1;
+
+  const advance = () => {
+    if (!atLast) setActive((value) => value + 1);
+    else {
+      setRevealed(true);
+      onComplete();
+    }
+  };
+
+  return (
+    <div className="experience-screen">
+      <div className="section-intro">
+        <div>
+          <h1>{lesson.experience.heading}</h1>
+          <p>{lesson.experience.intro}</p>
+        </div>
+        <img src={humanTransition} alt="One person moving from awareness and reaction through adjustment to adoption" />
+      </div>
+      <div className="stage-explorer">
+        <div className="stage-rail" role="tablist" aria-label="Invisible elements of change">
+          {lesson.experience.stages.map((item, index) => (
+            <button key={item.title} type="button" role="tab" aria-selected={active === index} className={`${active === index ? "active" : ""} ${index < active || revealed ? "seen" : ""}`} onClick={() => setActive(index)}>
+              <span>{index + 1}</span><strong>{item.title}</strong>
+            </button>
+          ))}
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.div className="stage-focus" key={active} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={transition}>
+            <span>{stage.title}</span>
+            <strong>{stage.body}</strong>
+          </motion.div>
+        </AnimatePresence>
+        {!revealed ? (
+          <button className="primary-cta" type="button" onClick={advance}>{atLast ? "See the real question" : "Next"}<ArrowRight /></button>
         ) : (
-          <motion.div className="realization" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
-            <span>Daniella realizes something critical:</span>
-            <strong>{lesson.reality.realization}</strong>
-            <p>{lesson.reality.risk}</p>
+          <motion.div className="experience-question" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
+            <div>{lesson.experience.bridge.map((line) => <p key={line}>{line}</p>)}</div>
+            <div>
+              {lesson.experience.question.slice(0, 3).map((line) => <p key={line}>{line}</p>)}
+              <strong>{lesson.experience.question[3]}</strong>
+            </div>
           </motion.div>
         )}
       </div>
@@ -171,152 +175,97 @@ function RealityScreen({ complete, onComplete }) {
   );
 }
 
-function PrincipleDrawer({ principle, onClose, onRead }) {
-  useEffect(() => {
-    const escape = (event) => event.key === "Escape" && onClose();
-    window.addEventListener("keydown", escape);
-    return () => window.removeEventListener("keydown", escape);
-  }, [onClose]);
+function ShiftScreen({ complete, onComplete }) {
+  const [phase, setPhase] = useState(complete ? 2 : 0);
 
-  return createPortal(
-    <motion.div className="drawer-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
-      <motion.aside className="principle-drawer" role="dialog" aria-modal="true" aria-labelledby="principle-title" initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={transition}>
-        <button className="close-button" type="button" onClick={onClose} aria-label="Close"><X /></button>
-        <img src={images[principle.image]} alt="" />
-        <h2 id="principle-title">{principle.title}</h2>
-        {principle.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-        {principle.quote && <blockquote>{principle.quote}</blockquote>}
-        {principle.bullets && <ul>{principle.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}
-        <p className="drawer-close-copy">{principle.close}</p>
-        <button className="primary-cta" type="button" onClick={() => { onRead(); onClose(); }}>Done <Check /></button>
-      </motion.aside>
-    </motion.div>,
-    document.body,
+  const advance = () => {
+    const next = Math.min(phase + 1, 2);
+    setPhase(next);
+    if (next === 2) onComplete();
+  };
+
+  return (
+    <div className="shift-screen">
+      <div className="shift-head">
+        <div><h1>{lesson.shift.heading}</h1></div>
+        <img src={supportingChange} alt="A change leader listening and supporting a colleague from uncertainty to confidence" />
+      </div>
+      <div className="shift-body">
+        <div className={`shift-column ${phase === 0 ? "active" : ""}`}>
+          <p>{lesson.shift.conventionalIntro}</p>
+          <div className="compact-list">{lesson.shift.conventional.map((item) => <span key={item}>{item}</span>)}</div>
+        </div>
+        {phase >= 1 && (
+          <motion.div className={`shift-column ${phase === 1 ? "active" : ""}`} initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} transition={transition}>
+            <p>{lesson.shift.deeperIntro}</p>
+            <div className="deep-list">{lesson.shift.deeper.map((item) => <strong key={item}><Check />{item}</strong>)}</div>
+          </motion.div>
+        )}
+      </div>
+      {phase < 2 ? (
+        <button className="primary-cta" type="button" onClick={advance}>{phase === 0 ? "Look deeper" : "Why it matters"}<ArrowRight /></button>
+      ) : (
+        <motion.div className="shift-proof" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
+          <div className="transition-answer">
+            <h2>{lesson.shift.question}</h2>
+            {lesson.shift.answer.map((line) => <p key={line}>{line}</p>)}
+          </div>
+          <div>
+            <p className="case-intro">{lesson.shift.caseStudyIntro}</p>
+            <div className="case-grid">{lesson.shift.caseStudy.map((item) => <span key={item}><Check />{item}</span>)}</div>
+          </div>
+        </motion.div>
+      )}
+    </div>
   );
 }
 
-function ResponseScreen({ visited, onVisit }) {
-  const [active, setActive] = useState(null);
+function MindsetScreen({ complete, onComplete }) {
+  const [visited, setVisited] = useState(complete ? lesson.mindset.principles.map((_, index) => index) : []);
+  const [active, setActive] = useState(0);
+  const [revealed, setRevealed] = useState(complete);
+  const visitedSet = useMemo(() => new Set(visited), [visited]);
+  const allVisited = visited.length === lesson.mindset.principles.length;
+
+  const choose = (index) => {
+    setActive(index);
+    setVisited((items) => [...new Set([...items, index])]);
+  };
+
+  const reveal = () => {
+    setRevealed(true);
+    onComplete();
+  };
+
   return (
-    <div className="response-screen">
-      <div className="response-intro">
+    <div className="mindset-screen">
+      <div className="mindset-intro">
         <div>
-          <h1>Daniella’s Turning Point</h1>
-          {lesson.turningPoint.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          <blockquote>{lesson.turningPoint.quote}</blockquote>
-          <p>{lesson.turningPoint.bridge}</p>
-          <p>{lesson.turningPoint.instruction}</p>
+          <h1>{lesson.mindset.heading}</h1>
+          <p>{lesson.mindset.intro}</p>
         </div>
-        <img src={turningPoint} alt="Daniella reframes the HRIS challenge from a system problem to a people transition problem" />
+        <img src={leadingChange} alt="A change leader guiding an inclusive group forward with confidence and feedback" />
       </div>
-      <div className="principle-heading">
-        <h2>The Change Management Response</h2>
-        <span>{visited.size} of {lesson.principles.length} explored</span>
-      </div>
-      <div className="principle-grid">
-        {lesson.principles.map((principle, index) => (
-          <button className={visited.has(index) ? "read" : ""} type="button" key={principle.title} onClick={() => setActive(index)}>
+      <div className="mindset-grid">
+        {lesson.mindset.principles.map((principle, index) => (
+          <button key={principle} type="button" className={`${active === index ? "active" : ""} ${visitedSet.has(index) ? "seen" : ""}`} onClick={() => choose(index)}>
             <span>{String(index + 1).padStart(2, "0")}</span>
-            <strong>{principle.title}</strong>
-            {visited.has(index) ? <Check /> : <ChevronRight />}
+            <strong>{principle}</strong>
+            {visitedSet.has(index) ? <Check /> : <ChevronRight />}
           </button>
         ))}
       </div>
-      <AnimatePresence>
-        {active !== null && <PrincipleDrawer principle={lesson.principles[active]} onClose={() => setActive(null)} onRead={() => onVisit(active)} />}
+      <AnimatePresence mode="wait">
+        <motion.div className="mindset-focus" key={active} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={transition}>
+          <strong>{lesson.mindset.principles[active]}</strong>
+        </motion.div>
       </AnimatePresence>
-    </div>
-  );
-}
-
-function OutcomeScreen({ complete, onComplete }) {
-  const [result, setResult] = useState(0);
-  const [reflected, setReflected] = useState(complete);
-  const atLast = result === lesson.outcome.results.length - 1;
-  const revealReflection = () => {
-    setReflected(true);
-    onComplete();
-  };
-
-  return (
-    <div className="outcome-screen">
-      <div className="outcome-copy">
-        <span className="time-chip">3 Months Later</span>
-        <h1>{lesson.outcome.heading}</h1>
-        <div className="result-window">
-          <AnimatePresence mode="wait">
-            <motion.div key={result} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={transition}>
-              <span>{String(result + 1).padStart(2, "0")}</span>
-              <strong>{lesson.outcome.results[result]}</strong>
-            </motion.div>
-          </AnimatePresence>
-          <div className="result-dots">{lesson.outcome.results.map((_, index) => <span key={index} className={index <= result ? "seen" : ""} />)}</div>
-        </div>
-        {!atLast ? (
-          <button className="primary-cta" type="button" onClick={() => setResult((value) => value + 1)}>Next result <ArrowRight /></button>
-        ) : !reflected ? (
-          <button className="primary-cta" type="button" onClick={revealReflection}>Hear Daniella reflect <ArrowRight /></button>
-        ) : (
-          <motion.div className="outcome-reflection" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
-            <p>And Daniella reflects:</p>
-            <blockquote>{lesson.outcome.reflection}</blockquote>
-          </motion.div>
-        )}
-      </div>
-      <img src={threeMonthOutcome} alt="Daniella and her team comfortably using the HR system three months later" />
-    </div>
-  );
-}
-
-function InsightScreen({ visited, onVisit, responses, onResponse }) {
-  const [active, setActive] = useState(0);
-  const response = responses[active];
-  const saved = visited.has(active);
-  const saveAndContinue = () => {
-    if (!response.trim()) return;
-    onVisit(active);
-    if (active < lesson.insight.questions.length - 1) setActive((index) => index + 1);
-  };
-
-  return (
-    <div className="insight-screen">
-      <div className="insight-statement">
-        <div>
-          <h1>{lesson.insight.heading}</h1>
-          <p>{lesson.insight.intro}</p>
-          <strong>{lesson.insight.statement}</strong>
-        </div>
-        <img src={turningPoint} alt="Daniella connects system delivery with people moving forward" />
-      </div>
-      <div className="discussion-journal">
-        <div className="journal-head">
-          <div><h2>{lesson.insight.discussionHeading}</h2><span>Question {active + 1} of {lesson.insight.questions.length}</span></div>
-          <div className="question-progress" aria-label={`${visited.size} of ${lesson.insight.questions.length} responses saved`}>
-            {lesson.insight.questions.map((_, index) => <span key={index} className={`${index === active ? "active" : ""} ${visited.has(index) ? "saved" : ""}`} />)}
-          </div>
-        </div>
-        <AnimatePresence mode="wait">
-          <motion.div className="journal-question" key={active} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={transition}>
-            <div className="question-copy"><MessageCircle /><p>{lesson.insight.questions[active]}</p></div>
-            <label htmlFor="discussion-response">Your response</label>
-            <textarea
-              id="discussion-response"
-              value={response}
-              onChange={(event) => onResponse(active, event.target.value)}
-              placeholder="Write your response here…"
-              rows="5"
-            />
-            <div className="journal-actions">
-              <button className="secondary-button" type="button" disabled={active === 0} onClick={() => setActive((index) => index - 1)}><ArrowLeft /> Previous question</button>
-              <button className="primary-cta" type="button" disabled={!response.trim()} onClick={saveAndContinue}>
-                {active === lesson.insight.questions.length - 1 ? (saved ? "Response saved" : "Save response") : "Save & continue"}
-                {active === lesson.insight.questions.length - 1 ? <Check /> : <ArrowRight />}
-              </button>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-        <p className="discussion-close">{lesson.insight.close}</p>
-      </div>
+      {!revealed && allVisited && <button className="primary-cta" type="button" onClick={reveal}>Continue <ArrowRight /></button>}
+      {revealed && (
+        <motion.div className="final-thought" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
+          {lesson.mindset.conclusion.map((line, index) => index === lesson.mindset.conclusion.length - 1 ? <strong key={line}>{line}</strong> : <p key={line}>{line}</p>)}
+        </motion.div>
+      )}
     </div>
   );
 }
@@ -340,26 +289,10 @@ function App() {
   const [completed, setCompleted] = useState(Array(lesson.tabs.length).fill(false));
   const [outlineOpen, setOutlineOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
-  const [principlesVisited, setPrinciplesVisited] = useState([]);
-  const [questionsVisited, setQuestionsVisited] = useState([]);
-  const [discussionResponses, setDiscussionResponses] = useState(() => lesson.insight.questions.map(() => ""));
   const [lessonComplete, setLessonComplete] = useState(false);
   useLessonAudio(soundOn);
 
-  const principleSet = useMemo(() => new Set(principlesVisited), [principlesVisited]);
-  const questionSet = useMemo(() => new Set(questionsVisited), [questionsVisited]);
   const markComplete = (index = current) => setCompleted((items) => items.map((item, itemIndex) => itemIndex === index ? true : item));
-  const visitPrinciple = (index) => setPrinciplesVisited((items) => {
-    const next = [...new Set([...items, index])];
-    if (next.length === lesson.principles.length) markComplete(2);
-    return next;
-  });
-  const visitQuestion = (index) => setQuestionsVisited((items) => {
-    const next = [...new Set([...items, index])];
-    if (next.length === lesson.insight.questions.length) markComplete(4);
-    return next;
-  });
-  const updateDiscussionResponse = (index, value) => setDiscussionResponses((items) => items.map((item, itemIndex) => itemIndex === index ? value : item));
   const goTo = (index) => {
     if (index < 0 || index >= lesson.tabs.length) return;
     if (index > 0 && !completed[index - 1]) return;
@@ -389,11 +322,10 @@ function App() {
               ))}
             </nav>
             <section className="lesson-content">
-              {current === 0 && <PromiseScreen complete={completed[0]} onComplete={() => markComplete(0)} />}
-              {current === 1 && <RealityScreen complete={completed[1]} onComplete={() => markComplete(1)} />}
-              {current === 2 && <ResponseScreen visited={principleSet} onVisit={visitPrinciple} />}
-              {current === 3 && <OutcomeScreen complete={completed[3]} onComplete={() => markComplete(3)} />}
-              {current === 4 && <InsightScreen visited={questionSet} onVisit={visitQuestion} responses={discussionResponses} onResponse={updateDiscussionResponse} />}
+              {current === 0 && <OpeningScreen complete={completed[0]} onComplete={() => markComplete(0)} />}
+              {current === 1 && <ExperienceScreen complete={completed[1]} onComplete={() => markComplete(1)} />}
+              {current === 2 && <ShiftScreen complete={completed[2]} onComplete={() => markComplete(2)} />}
+              {current === 3 && <MindsetScreen complete={completed[3]} onComplete={() => markComplete(3)} />}
             </section>
             <footer className="lesson-footer">
               <button className="secondary-button" type="button" disabled={current === 0} onClick={() => goTo(current - 1)}><ArrowLeft /> Previous</button>

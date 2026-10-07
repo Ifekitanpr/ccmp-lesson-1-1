@@ -1,100 +1,95 @@
 export const lesson = {
   number: "1.1",
-  title: "Case Study: Implementing a New HR Information System",
-  fullTitle: "LESSON 1.1: Case Study: Implementing a New HR Information System.",
-  tabs: ["The promise", "Reality hits", "The response", "Three months later", "The insight"],
-  background: {
-    heading: "Daniella and the HRIS Transformation",
-    paragraphs: [
-      "Daniella is a People & Culture Manager at a mid-sized professional services firm.",
-      "For months, she had championed the implementation of a new HR Information System (HRIS)—a platform designed to automate payroll, streamline performance management, and centralize employee records.",
-    ],
-    promise: ["Faster processes", "Better data visibility", "Less administrative burden"],
-    delivery: ["The project team delivered flawlessly.", "Timelines were met.", "The system went live."],
-    close: "On paper, Daniella had just led a successful transformation.",
-  },
-  reality: {
-    intro: "Two weeks after go-live, Daniella starts noticing something unsettling.",
-    signals: [
-      "Employees are quietly avoiding the new system",
-      "Managers complain performance reviews now feel more complicated",
-      "HR inboxes are flooded with support tickets",
-      "Conversations in hallways sound different…",
-    ],
-    quotes: ["“This system feels like surveillance.”", "“Why is this taking longer than before?”"],
-    realization: "The system has changed… but the people haven’t.",
-    risk: "What she thought was a successful project… was now at risk of becoming a failed transformation.",
-  },
-  turningPoint: {
-    paragraphs: ["Instead of pushing harder, Daniella pauses.", "She shifts her thinking:"],
-    quote: "“This isn’t a system problem. This is a people transition problem.”",
-    bridge: "And that’s when she leads a structured change management response that involved four key principles.",
-    instruction: "Click on each of them to explore in detail.",
-  },
-  principles: [
-    {
-      title: "Stakeholder Engagement — Listening Before Fixing",
-      paragraphs: [
-        "Daniella organizes listening sessions with employees, managers, and HR teams.",
-        "She hears the real issues:",
-      ],
-      bullets: ["Fear of being monitored", "Confusion about new processes", "Lack of confidence using the system"],
-      close: "For the first time, people feel heard.",
-      image: "listening-session",
-    },
-    {
-      title: "Targeted Enablement — Not All Users Are the Same",
-      paragraphs: ["Daniella replaces generic training with role-based support:"],
-      bullets: [
-        "Managers learn how to run efficient performance reviews",
-        "Employees get simple, task-focused walkthroughs",
-        "HR teams receive deeper system training",
-      ],
-      close: "Now, learning becomes relevant and practical.",
-      image: "targeted-enablement",
-    },
-    {
-      title: "Leadership Alignment — Resetting the Narrative",
-      paragraphs: [
-        "Daniella works with senior leaders to address the growing mistrust.",
-        "Leaders begin to communicate clearly:",
-      ],
-      quote: "“This system is here to support you—not control you.”",
-      close: "Consistency replaces confusion. Trust starts to rebuild.",
-      image: "targeted-enablement",
-    },
-    {
-      title: "Reinforcement and Feedback — Making Progress Visible",
-      paragraphs: ["Daniella introduces:"],
-      bullets: [
-        "Quick wins (“Payroll processing time reduced by 30%”)",
-        "Feedback loops (surveys, check-ins, open channels)",
-        "Small system improvements based on user input",
-      ],
-      close: "People begin to see the system evolving with them.",
-      image: "three-month-outcome",
-    },
+  title: "You have Already Experienced Change Management — You Just Didn’t Call It That",
+  tabs: [
+    "Think about change",
+    "You have experienced it",
+    "The shift",
+    "The mindset",
   ],
-  outcome: {
-    heading: "The Outcome of Daniella’s action 3 Months Later was:",
-    results: [
-      "Adoption increased significantly across teams",
-      "HR support tickets dropped sharply",
-      "Managers reported smoother, faster performance reviews",
-      "Employees began to trust—and even prefer—the new system",
+  opening: {
+    heading: "Think about the last time something changed in your life…",
+    subheading: "Something outside your normal routine…",
+    examples: [
+      "Maybe a new app you had to start using",
+      "A new school system",
+      "A new workplace process",
+      "A new team, role, or expectation",
     ],
-    reflection: "“We didn’t fail because of the system. We almost failed because we assumed people would just adapt.”",
+    sequence: [
+      "At first, it felt small.",
+      "Just a “simple update.”",
+      "But then…",
+      "You hesitated.",
+      "You asked questions.",
+      "You compared it to the old way.",
+      "You maybe even resisted it—quietly.",
+      "And slowly, over time, you adjusted.",
+    ],
+    conclusion: [
+      "What you experienced in that moment wasn’t just change.",
+      "It was change management.",
+    ],
   },
-  insight: {
-    heading: "The Insight That Changed Everything",
-    intro: "Daniella’s biggest realization was simple—but powerful:",
-    statement: "Change does not succeed when systems go live. It succeeds when people move forward.",
-    discussionHeading: "Join the Discussion",
-    questions: [
-      "At what point should the organization have introduced change management in this case?",
-      "Which intervention had the greatest impact on adoption—and why?",
-      "Have you experienced a “successful project” that failed because people weren’t ready for the change?",
+  experience: {
+    heading: "You have Already Experienced Change Management — You Just Didn’t Call It That",
+    intro: "Every change you’ve lived through had the same invisible elements:",
+    stages: [
+      { title: "Awareness", body: "Understanding what is changing" },
+      { title: "Reaction", body: "Confusion, concern, or even resistance" },
+      { title: "Adjustment", body: "Learning how to operate in the new reality" },
+      { title: "Adoption", body: "Making the new way your normal" },
     ],
-    close: "Share your thoughts and experiences. Change management starts with conversation.",
+    bridge: [
+      "Whether you realized it or not…",
+      "You were going through a structured human transition.",
+    ],
+    question: [
+      "So the real question is not: Will change happen?",
+      "Because it always does.",
+      "The real question is:",
+      "How will people experience that change—and how will you support them through it?",
+    ],
+  },
+  shift: {
+    heading: "The Shift That Changes Everything",
+    conventionalIntro: "Most people think change management is:",
+    conventional: ["Communication", "Training", "Announcements"],
+    deeperIntro: "But real change management is something deeper:",
+    deeper: [
+      "It is helping people move from uncertainty to confidence",
+      "It is turning resistance into understanding",
+      "It is making the new way easier than the old way",
+    ],
+    question: "What separates successful change from failed change?",
+    answer: [
+      "It’s not the quality of the solution.",
+      "It’s the quality of the transition.",
+    ],
+    caseStudyIntro: "That’s why in the case study below:",
+    caseStudy: [
+      "Listening mattered more than enforcing",
+      "Targeted support worked better than generic training",
+      "Leadership clarity reduced fear",
+      "Feedback loops rebuilt trust",
+    ],
+  },
+  mindset: {
+    heading: "The Most Important Mindset to Adopt",
+    intro: "As you continue your CCMP journey, this is the mindset that will shape everything:",
+    principles: [
+      "Focus on adoption, not just implementation",
+      "Diagnose people challenges, not just system issues",
+      "Understand behavior, not just processes",
+      "Enable progress, not just completion",
+    ],
+    conclusion: [
+      "Because at the end of the day…",
+      "Change initiatives do not fail because they were designed poorly.",
+      "They fail because people were expected to adapt— without being supported.",
+      "And when you understand that…",
+      "You’re no longer just observing change.",
+      "You are learning how to lead it.",
+    ],
   },
 };

@@ -1,0 +1,7 @@
+Use case: scientific-educational
+Asset type: responsive web learning illustration for a CCMP clickthrough lesson
+Primary request: Visually depict a single person moving through a four-stage human transition: first noticing a change, then reacting with questions, then learning and adjusting, and finally confidently adopting the new way. Use four sequential poses of the same person connected by one simple forward path; the emotional progression must read clearly from uncertainty to confidence.
+Style/medium: polished flat 2D editorial vector-style raster illustration matching CertSprints lesson artwork; crisp rounded geometry, subtle depth, professional and warm.
+Composition/framing: wide landscape composition, four clearly separated but connected moments, minimal supporting objects, generous white space.
+Color palette: vivid CertSprints blue, deep navy, warm orange accents, pale cool blue neutrals, white background.
+Constraints: no text, no labels, no numbers, no logos, no watermark, no decorative confetti, no gradients, no photorealism.

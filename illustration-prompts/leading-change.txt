@@ -1,0 +1,7 @@
+Use case: illustration-story
+Asset type: responsive web learning illustration for a CCMP clickthrough lesson
+Primary request: Show an inclusive change leader enabling a small group to move forward together into a confidently adopted new way of working. The leader is beside the group, listening and guiding rather than pulling them; people show growing confidence, collaboration, and ownership. Include a simple forward pathway and one subtle feedback-loop motif.
+Style/medium: polished flat 2D editorial vector-style raster illustration matching CertSprints lesson artwork; crisp rounded geometry, subtle depth, diverse professional characters, confident and human.
+Composition/framing: wide landscape composition, one cohesive group, strong forward movement, low object count, generous white negative space.
+Color palette: vivid CertSprints blue, deep navy, warm orange accents, pale cool blue neutrals, white background.
+Constraints: no text, no labels, no logos, no watermark, no trophy, no checkmark badge, no decorative confetti, no gradients, no photorealism.

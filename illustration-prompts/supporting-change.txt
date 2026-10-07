@@ -1,0 +1,7 @@
+Use case: illustration-story
+Asset type: responsive web learning illustration for a CCMP clickthrough lesson
+Primary request: Show a change leader helping a colleague move from uncertainty to confidence. On one side the colleague is hesitant and surrounded by a few unclear process cues; in the center the leader listens and provides targeted support; on the other side the colleague uses the new way confidently. Emphasize human support and transition rather than software delivery.
+Style/medium: polished flat 2D editorial vector-style raster illustration matching CertSprints lesson artwork; crisp rounded geometry, subtle depth, diverse professional characters, calm and optimistic.
+Composition/framing: wide landscape visual flow from uncertainty to confidence, three human-centered beats, low object count, generous white negative space.
+Color palette: vivid CertSprints blue, deep navy, warm orange accents, pale cool blue neutrals, white background.
+Constraints: no text, no labels, no logos, no watermark, no bridge metaphor, no decorative confetti, no gradients, no photorealism.
